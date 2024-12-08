@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny Christmas Quiz 🎄</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-image: url('https://scontent-fra5-1.xx.fbcdn.net/v/t1.6435-9/137058064_10159008324145120_6985112015791497751_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=PG-Pyf6seMAQ7kNvgHI6YI1&_nc_zt=23&_nc_ht=scontent-fra5-1.xx&_nc_gid=AvxiCVI8xgG3HqSM9nROYqE&oh=00_AYAV7kMDMiz5e0VXOytOZ5gckw-LLHYfqNMiGNpB_ptapQ&oe=677CE160'); /* Add your image file here */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Transparent black for readability */
+            border-radius: 10px;
+        }
+        h1 {
+            color: #ffdd00;
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Funny Christmas Quiz 🎄</h1>
+        <p>Answer the questions one by one!</p>
+
+        <!-- Questions -->
+        <div id="quiz">
+            <div class="question active" id="q1">
+                <label>If Santa visited Eritrea, do you think he'd prefer injera or tsebhi for dinner?</label><br>
+                <input type="text" id="answer1" placeholder="Your answer...">
+                <button onclick="nextQuestion(1)">Next</button>
+            </div>
+            <div class="question" id="q2">
+                <label>Who eats more during Christmas: your uncle or your dad?</label><br>
+                <input type="text" id="answer2" placeholder="Your answer...">
+                <button onclick="nextQuestion(2)">Next</button>
+            </div>
+            <div class="question" id="q3">
+                <label>Which of your friends is most likely to make everyone laugh at the Christmas party?</label><br>
+                <input type="text" id="answer3" placeholder="Your answer...">
+                <button onclick="nextQuestion(3)">Next</button>
+            </div>
+            <div class="question" id="q4">
+                <label>Which friend would create the most drama over who gets the last piece of doro?</label><br>
+                <input type="text" id="answer4" placeholder="Your answer...">
+                <button onclick="nextQuestion(4)">Next</button>
+            </div>
+            <div class="question" id="q5">
+                <label>Which friend eats the most and still takes food home?</label><br>
+                <input type="text" id="answer5" placeholder="Your answer...">
+                <button onclick="nextQuestion(5)">Next</button>
+            </div>
+            <div class="question" id="q6">
+                <label>If you could spend Christmas with someone who isn’t here right now, who would it be?</label><br>
+                <input type="text" id="answer6" placeholder="Your answer...">
+                <button onclick="showResults()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result" class="result">
+            <h2>Thank you for playing!</h2>
+            <p id="answers"></p>
+            <p>🎁 Christmas is a time to laugh, love, and remember those we cherish.</p>
+            <p>No matter the distance or the drama over food, may your Christmas be full of joy, warmth, and suwa! Wishing you a blessed and unforgettable celebration! 🎅✨</p>
+        </div>
+    </div>
+
+    <script>
+        let answers = [];
+
+        function nextQuestion(current) {
+            // Get the answer for the current question
+            const answer = document.getElementById(`answer${current}`).value.trim();
+            if (answer === "") {
+                alert("Please provide an answer before moving on.");
+                return;
+            }
+
+            // Store the answer and move to the next question
+            answers.push(answer);
+            document.getElementById(`q${current}`).classList.remove("active");
+            const next = document.getElementById(`q${current + 1}`);
+            if (next) next.classList.add("active");
+        }
+
+        function showResults() {
+            // Get the last answer
+            const lastAnswer = document.getElementById("answer6").value.trim();
+            if (lastAnswer === "") {
+                alert("Please provide an answer before submitting.");
+                return;
+            }
+            answers.push(lastAnswer);
+
+            // Hide the quiz and show the results
+            document.getElementById("quiz").style.display = "none";
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+
+            // Display the answers
+            document.getElementById("answers").innerHTML = `
+                1. Santa's dinner choice: <strong>${answers[0]}</strong><br>
+                2. Big eater of Christmas: <strong>${answers[1]}</strong><br>
+                3. Funniest friend: <strong>${answers[2]}</strong><br>
+                4. Drama king/queen: <strong>${answers[3]}</strong><br>
+                5. Greedy food lover: <strong>${answers[4]}</strong><br>
+                6. Missing this person for Christmas: <strong>${answers[5]}</strong>
+            `;
+        }
+    </script>
+</body>
+</html>
